@@ -1,0 +1,25 @@
+{
+  "name": "juicer-loader",
+  "version": "0.0.1",
+  "description": "A webpack loader for juicer template engine",
+  "main": "index.js",
+  
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/sirzxj/juicer-build"
+  },
+  "keywords": [
+    "webpack",
+    "juicer",
+    "juicer-build",
+    "template"
+  ],
+  "author": {
+    "name": "sirzxj",
+    "email": "sirzxj@126.com",
+    "url": "https://github.com/sirzxj"
+  },
+  "dependencies": {
+    "juicer": "^0.6.14"
+  }
+}
