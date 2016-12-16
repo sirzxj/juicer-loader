@@ -12,6 +12,7 @@
     "webpack",
     "juicer",
     "juicer-build",
+     "juicer-loader",
     "template"
   ],
   "author": {
