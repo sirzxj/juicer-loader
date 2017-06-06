@@ -1,29 +1,7 @@
-
 var juicer = require('juicer');
-
-function obj2str(obj) {
-	var result = '{';
-	var keys = Object.keys(obj);
-	var flag = false;
-	keys.forEach(function(key) {
-		result += flag ? ',' : '';
-		flag = true;
-		result += JSON.stringify(key) + ':';
-		if (typeof obj[key] === 'object') {
-			result += obj2str(obj[key]);
-		} else if (typeof obj[key] !== 'function') {
-			result += JSON.stringify(obj[key].toString());
-		} else {
-			result += obj[key].toString();
-		}
-	});
-	result += '}'
-	return result;
-}
-
+		
 module.exports = function(source) {
-	var method_body = '_method={};_method.__escapehtml=' + obj2str(juicer.options._method.__escapehtml) + ';' + '_method.__throw=' + juicer.options._method.__throw.toString();
-
+	var method_body = `_method={},_method.__escapehtml={escapehash:{"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&#x27;","/":"&#x2f;"},escapereplace:function(e){return _method.__escapehtml.escapehash[e]},escaping:function(e){return"string"!=typeof e?e:e.replace(/[&<>"']/gim,this.escapereplace)},detection:function(e){return"undefined"==typeof e?"":e}},_method.__throw=function(e){if("undefined"!=typeof console){if(console.warn)return void console.warn(e);if(console.log)return void console.log(e)}throw e};`;
 	var result = juicer.compile(source)._render.toString().replace(/^function anonymous[^{]*?{([\s\S]*?)}$/igm, function($, fn_body) {
 		return 'function ' + '(_, _method) {' + method_body + fn_body + '}';
 	});
